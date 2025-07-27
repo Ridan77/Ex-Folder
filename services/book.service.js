@@ -49,24 +49,24 @@ function getDefaultFilter() {
     return { txt: '', price: ''  } 
 }
 
-function _createBooks() {
-    let books = loadFromStorage(BOOK_KEY)
-    if (!books || !books.length) {
-        books = [
+// function _createBooks() {
+//     let books = loadFromStorage(BOOK_KEY)
+//     if (!books || !books.length) {
+//         books = [
             
-            _createBook('metus hendrerit', 'placerat nisi sodales suscipit tellus',
-                '/assets/img/1.jpg',
-                {amount:109,currencyCode:'EUR',isOnSale: false }),
-            _createBook('metus 2', 'placerat nisi sodales suscipit tellus',
-                '/assets/img/2.jpg',
-                {amount:70,currencyCode:'EUR',isOnSale: false }),
-            _createBook('metus 3', 'placerat nisi sodales suscipit tellus',
-                '/assets/img/3.jpg',
-                {amount:50,currencyCode:'EUR',isOnSale: false }),
-        ]
-        saveToStorage(BOOK_KEY, books)
-    }
-}
+//             _createBook('metus hendrerit', 'placerat nisi sodales suscipit tellus',
+//                 '/assets/img/1.jpg',
+//                 {amount:109,currencyCode:'EUR',isOnSale: false }),
+//             _createBook('metus 2', 'placerat nisi sodales suscipit tellus',
+//                 '/assets/img/2.jpg',
+//                 {amount:70,currencyCode:'EUR',isOnSale: false }),
+//             _createBook('metus 3', 'placerat nisi sodales suscipit tellus',
+//                 '/assets/img/3.jpg',
+//                 {amount:50,currencyCode:'EUR',isOnSale: false }),
+//         ]
+//         saveToStorage(BOOK_KEY, books)
+//     }
+// }
 
 function _createBook(title, desc, imgSrc, listPrice) {
     const book = {
@@ -82,3 +82,30 @@ function _createBook(title, desc, imgSrc, listPrice) {
 
 
 
+function _createBooks() {
+    const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
+    const books = []
+    for (let i = 0; i < 20; i++) {
+        const book = {
+            id: makeId(),
+            title: makeLorem(2),
+            subtitle: makeLorem(4),
+            authors: [
+                makeLorem(1)
+            ],
+            publishedDate: getRandomIntInclusive(1950, 2024),
+            desc: makeLorem(20),
+            pageCount: getRandomIntInclusive(20, 600),
+            categories: [ctgs[getRandomIntInclusive(0, ctgs.length - 1)]],
+            imgSrc: `/assets/img/${i+1}.jpg`,
+            language: "en",
+            listPrice: {
+                amount: getRandomIntInclusive(80, 500),
+                currencyCode: "EUR",
+                isOnSale: Math.random() > 0.7
+            }
+        }
+        books.push(book)
+    }
+        saveToStorage(BOOK_KEY, books)
+ }
