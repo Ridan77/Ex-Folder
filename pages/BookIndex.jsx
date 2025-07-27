@@ -1,3 +1,4 @@
+import { BookDetails } from "../cmps/BookDetails.jsx";
 import { BookFilter } from "../cmps/BookFilter.jsx";
 import { BookList } from "../cmps/BookList.jsx";
 import { bookService } from "../services/book.service.js";
@@ -38,10 +39,7 @@ export function BookIndex() {
     setFilterBy({ ...newFilterBy });
   }
 
-  function evStop(ev) {
-    ev.stopPropagation();
-  }
-
+ 
   function onClose() {
     setSelectedBook(null);
   }
@@ -52,16 +50,9 @@ export function BookIndex() {
       <BookFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} />
       <BookList onRemoveBook={onRemoveBook} onSelectBook={onSelectBook} books={books} />
 
-      {selectedBook && (
-        <section onClick={onClose} className="backdrop">
-          <dialog onClick={evStop} className="book-details">
-            <h2>{selectedBook.title}</h2>
-            
-
-            <button onClick={onClose}>Close</button>
-          </dialog>
-        </section>
-      )}
+      {selectedBook && (<BookDetails book={selectedBook} onClose={onClose}/>)}
+       
+      
     </section>
   );
 }
