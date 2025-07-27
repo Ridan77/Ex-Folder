@@ -1,4 +1,4 @@
-// import { BookFilter } from "../cmps/BookFilter.jsx"
+import { BookFilter } from "../cmps/BookFilter.jsx"
 import { BookList } from "../cmps/BookList.jsx"
 import { bookService } from "../services/book.service.js"
 
@@ -33,13 +33,12 @@ export function BookIndex() {
     function handleSetFilter(newFilterBy) {
         setFilterBy({ ...newFilterBy })
     }
-    // console.log('Render');
 
     if (!books) return <div>Loading...</div>
     return (
         <section className="book-index">
             
-            {/* <BookFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} /> */}
+            <BookFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} />
             <BookList onRemoveBook={onRemoveBook} books={books} />
 
       

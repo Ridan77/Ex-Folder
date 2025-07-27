@@ -1,18 +1,18 @@
-.car-filter {
+.book-filter {
     background-color: var(--clr2bg);
     padding-block: 1em;
 }
 
-.car-filter > h2 {
+.book-filter > h2 {
     margin-top: 0;
 }
 
-.car-filter form {
+.book-filter form {
     display: grid;
     grid-template-columns: 100px 200px;
     gap: .5em;
 }
 
-.car-filter form button {
+.book-filter form button {
     margin-inline: 0
 }

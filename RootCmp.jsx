@@ -6,7 +6,7 @@ import { BookIndex } from "./pages/BookIndex.jsx"
 
 export function RootCmp() {
 
-    const [page, setPage] = useState('')
+    const [page, setPage] = useState('book')
 
 
     return (

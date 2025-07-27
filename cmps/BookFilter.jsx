@@ -49,19 +49,19 @@ export function BookFilter({ defaultFilter, handleSetFilter }) {
 
  
 
-    const { txt, minSpeed } = filterByToEdit
+    const { txt, price } = filterByToEdit
     return (
         <section className="book-filter container">
-            <h2>Filter Our Books</h2>
+            <h3>Filter Our Books</h3>
 
             <form>
-                <label htmlFor="txt">Vendor</label>
+                <label htmlFor="txt">Title</label>
                 <input onChange={handleChange} name="txt" value={txt} id="txt" type="text" />
 
-                <label htmlFor="minSpeed">Min Speed</label>
-                <input onChange={handleChange} name="minSpeed" value={minSpeed} id="minSpeed" type="number" />
+                <label htmlFor="price">Max Price</label>
+                <input onChange={handleChange} name="price" value={price} id="price" type="number" />
             </form>
-            {/* <button onClick={onSearch}>Search</button> */}
+      
         </section>
     )
 }
