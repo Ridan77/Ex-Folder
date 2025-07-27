@@ -46,14 +46,14 @@ function save(book) {
 
 function getDefaultFilter() {
     // return { txt: '', price: '', data: { txtData: '' } }
-    return { txt: '', price: ''  } 
+    return { txt: '', price: '' }
 }
 
 // function _createBooks() {
 //     let books = loadFromStorage(BOOK_KEY)
 //     if (!books || !books.length) {
 //         books = [
-            
+
 //             _createBook('metus hendrerit', 'placerat nisi sodales suscipit tellus',
 //                 '/assets/img/1.jpg',
 //                 {amount:109,currencyCode:'EUR',isOnSale: false }),
@@ -68,44 +68,47 @@ function getDefaultFilter() {
 //     }
 // }
 
-function _createBook(title, desc, imgSrc, listPrice) {
-    const book = {
-    id : makeId(),
-    title,
-    desc,
-    imgSrc,
-    listPrice ,
-    }
-    return book
+// function _createBook(title, desc, imgSrc, listPrice) {
+//     const book = {
+//         id: makeId(),
+//         title,
+//         desc,
+//         imgSrc,
+//         listPrice,
+//     }
+//     return book
 
-}
+// }
 
 
 
 function _createBooks() {
-    const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
-    const books = []
-    for (let i = 0; i < 20; i++) {
-        const book = {
-            id: makeId(),
-            title: makeLorem(2),
-            subtitle: makeLorem(4),
-            authors: [
-                makeLorem(1)
-            ],
-            publishedDate: getRandomIntInclusive(1950, 2024),
-            desc: makeLorem(20),
-            pageCount: getRandomIntInclusive(20, 600),
-            categories: [ctgs[getRandomIntInclusive(0, ctgs.length - 1)]],
-            imgSrc: `/assets/img/${i+1}.jpg`,
-            language: "en",
-            listPrice: {
-                amount: getRandomIntInclusive(80, 500),
-                currencyCode: "EUR",
-                isOnSale: Math.random() > 0.7
+    let books = loadFromStorage(BOOK_KEY)
+    if (!books || !books.length) {
+        const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
+        const books = []
+        for (let i = 0; i < 20; i++) {
+            const book = {
+                id: makeId(),
+                title: makeLorem(2),
+                subtitle: makeLorem(4),
+                authors: [
+                    makeLorem(1)
+                ],
+                publishedDate: getRandomIntInclusive(1950, 2024),
+                desc: makeLorem(20),
+                pageCount: getRandomIntInclusive(20, 600),
+                categories: [ctgs[getRandomIntInclusive(0, ctgs.length - 1)]],
+                imgSrc: `/assets/img/${i + 1}.jpg`,
+                language: "en",
+                listPrice: {
+                    amount: getRandomIntInclusive(80, 500),
+                    currencyCode: "EUR",
+                    isOnSale: Math.random() > 0.7
+                }
             }
+            books.push(book)
         }
-        books.push(book)
-    }
         saveToStorage(BOOK_KEY, books)
- }
+    }
+}
