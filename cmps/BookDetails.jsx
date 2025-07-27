@@ -1,4 +1,5 @@
-// import { BookPreview } from "./BookPreview.jsx";
+import { LongTxt } from "../cmps/LongTxt.jsx";
+
 
 export function BookDetails({ book, onClose }) {
 
@@ -31,7 +32,7 @@ const onSaleSign = book.listPrice.isOnSale ? 'On Sale' :''
         <h2>Title {book.title}</h2>
         <h3>Subtitle: {book.subtitle}</h3>
         <h3>By: {book.authors[0]}</h3>
-        <p>Description:{book.desc}</p>
+        <h4>Description:<LongTxt txt={book.desc} length={100} /></h4>
         <p>
           Pages: {book.pageCount} <span className="highlight" >{getPageComent()}</span>
         </p>

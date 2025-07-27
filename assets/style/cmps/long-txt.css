@@ -1,0 +1,8 @@
+.long-text {
+  margin-top: 10px;
+  text-align: center;
+  font-family: serif;
+}
+.read-more {
+  color: rgb(110, 17, 204);
+}
