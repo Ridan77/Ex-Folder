@@ -8,10 +8,23 @@ export function BookDetails({ book, onClose }) {
     else if (book.pageCount < 100) return "Light Reading";
   }
   
+  function getPublishDateComent(){
+    const currYear = new Date().getFullYear()
+       return currYear-book.publishedDate > 10 ? 'Vintage' : 'New'
+  }
+
+  const price = book.listPrice.amount
+  function getPriceClass(){
+    if(price >150 ) return 'red-price'
+    else if (price<20) return 'green-price'
+    else return ''
+  }
+
   function evStop(ev) {
     ev.stopPropagation();
   }
-console.log(book.imgSrc)
+const onSaleSign = book.listPrice.isOnSale ? 'On Sale' :''
+
   return (
     <section onClick={onClose} className="backdrop">
       <dialog onClick={evStop} className="book-details">
@@ -22,6 +35,9 @@ console.log(book.imgSrc)
         <p>
           Pages: {book.pageCount} <span className="highlight" >{getPageComent()}</span>
         </p>
+        <p className="highlight" >{getPublishDateComent()}</p>
+        <p>Price: <span className={`${getPriceClass()}`} >{price}</span> </p>
+        <p> <span className="on-sale">{onSaleSign}</span></p>
         <img src={`${book.imgSrc}`} alt="" />
         <button onClick={onClose}>Close</button>
       </dialog>

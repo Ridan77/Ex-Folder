@@ -1,54 +1,61 @@
-
-
 /** DETAILS */
 .backdrop {
-    background-color: rgba(0, 0, 0, 0.517);
-    position: fixed;
-    inset: 0;
-    z-index: 10;
-    backdrop-filter: blur(3px);
-
+  background-color: rgba(0, 0, 0, 0.517);
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  backdrop-filter: blur(3px);
 }
 
 .book-details {
-    position: fixed;
-    background-color: white;
-    border-radius: 10px;
-    padding: 30px;
-    width: 60vw;
-    min-width: 270px;
-    aspect-ratio: 1;
-    inset: 0;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    border: none;
-    z-index: 20;
-    font-family:serif;
-        font-size: 0.8rem;
-
+  position: fixed;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  width: 60vw;
+  min-width: 270px;
+  aspect-ratio: 1;
+  inset: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: none;
+  z-index: 20;
+  font-family: serif;
+  font-size: 0.8rem;
 }
 
-
-
-
 .book-details img {
-    max-width: 70%;
+  max-width: 70%;
 }
 
 .book-details ul {
-    margin-block: 0 30px;
+  margin-block: 0 30px;
 }
 
 .book-details p {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
-.highlight{
-    color: rgb(110, 17, 204);
-    font-style: italic;
-    font-size: 0.9rem;
-    background-color: antiquewhite;
+.highlight {
+  color: rgb(110, 17, 204);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.red-price {
+  color: red;
+  font-size: 0.9rem;
+}
+
+.green-price {
+  color: green;
+  font-size: 0.9rem;
+}
+
+.on-sale {
+  color: red;
+  font-size: 1.2rem;
 }

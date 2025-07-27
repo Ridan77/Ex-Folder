@@ -109,6 +109,8 @@ function _createBooks() {
             }
             books.push(book)
         }
+        books[0].listPrice.amount=14
+        books[0].listPrice.isOnSale=true
         saveToStorage(BOOK_KEY, books)
     }
 }
