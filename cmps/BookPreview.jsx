@@ -4,7 +4,7 @@ export function BookPreview({ book }) {
     return (
         <article className="book-preview">
             <h2>Title: {title}</h2>
-            <h4>Desc {desc}</h4>
+            <h6>Description: {desc}</h6>
             <img src={imgSrc} alt="Book Image" />
         </article>
     )
