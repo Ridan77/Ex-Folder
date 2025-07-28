@@ -1,4 +1,4 @@
-import { BookDetails } from "../cmps/BookDetails.jsx";
+import { BookDetails } from "../pages/BookDetails.jsx"
 import { BookFilter } from "../cmps/BookFilter.jsx";
 import { BookList } from "../cmps/BookList.jsx";
 import { bookService } from "../services/book.service.js";

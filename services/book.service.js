@@ -9,7 +9,10 @@ export const bookService = {
     get,
     remove,
     save,
-    getDefaultFilter
+    getDefaultFilter,
+    getPriceClass,
+
+
 }
 
 function query(filterBy = {}) {
@@ -49,36 +52,11 @@ function getDefaultFilter() {
     return { txt: '', price: '' }
 }
 
-// function _createBooks() {
-//     let books = loadFromStorage(BOOK_KEY)
-//     if (!books || !books.length) {
-//         books = [
-
-//             _createBook('metus hendrerit', 'placerat nisi sodales suscipit tellus',
-//                 '/assets/img/1.jpg',
-//                 {amount:109,currencyCode:'EUR',isOnSale: false }),
-//             _createBook('metus 2', 'placerat nisi sodales suscipit tellus',
-//                 '/assets/img/2.jpg',
-//                 {amount:70,currencyCode:'EUR',isOnSale: false }),
-//             _createBook('metus 3', 'placerat nisi sodales suscipit tellus',
-//                 '/assets/img/3.jpg',
-//                 {amount:50,currencyCode:'EUR',isOnSale: false }),
-//         ]
-//         saveToStorage(BOOK_KEY, books)
-//     }
-// }
-
-// function _createBook(title, desc, imgSrc, listPrice) {
-//     const book = {
-//         id: makeId(),
-//         title,
-//         desc,
-//         imgSrc,
-//         listPrice,
-//     }
-//     return book
-
-// }
+function getPriceClass(amount) {
+    if (amount > 150) return 'red'
+    if (amount < 20) return 'green'
+    return ''
+}
 
 
 
@@ -109,8 +87,8 @@ function _createBooks() {
             }
             books.push(book)
         }
-        books[0].listPrice.amount=14
-        books[0].listPrice.isOnSale=true
+        books[0].listPrice.amount = 14
+        books[0].listPrice.isOnSale = true
         saveToStorage(BOOK_KEY, books)
     }
 }
