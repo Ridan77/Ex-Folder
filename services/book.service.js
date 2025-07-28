@@ -12,6 +12,8 @@ export const bookService = {
     getDefaultFilter,
     getPriceClass,
     getEmptyBook,
+    saveReview,
+    getReviews,
 
 
 }
@@ -76,6 +78,7 @@ function _createBooks() {
                 authors: [
                     makeLorem(1)
                 ],
+                reviews: [],
                 publishedDate: getRandomIntInclusive(1950, 2024),
                 desc: makeLorem(20),
                 pageCount: getRandomIntInclusive(20, 600),
@@ -94,4 +97,21 @@ function _createBooks() {
         books[0].listPrice.isOnSale = true
         saveToStorage(BOOK_KEY, books)
     }
+}
+
+
+function saveReview(review, bookId) {
+    console.log(review)
+    return get(bookId)
+        .then((book) => {
+            book.reviews.unshift(review)
+            save(book)
+            return book.reviews
+        })
+}
+function getReviews(bookId) {
+    return get(bookId)
+          .then(book => {
+            return book.reviews
+        })
 }

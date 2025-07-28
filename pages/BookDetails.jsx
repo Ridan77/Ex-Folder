@@ -1,3 +1,4 @@
+import { AddReview } from "../cmps/AddReview.jsx";
 import { LongTxt } from "../cmps/LongTxt.jsx"
 import { bookService } from "../services/book.service.js";
 
@@ -132,6 +133,7 @@ export function BookDetails() {
           <LongTxt txt={desc} />
         </div>
         
+      <AddReview bookId={bookId}/>
       </div>
     </section>
   );
