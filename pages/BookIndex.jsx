@@ -2,6 +2,8 @@ import { BookDetails } from "../pages/BookDetails.jsx";
 import { BookFilter } from "../cmps/BookFilter.jsx";
 import { BookList } from "../cmps/BookList.jsx";
 import { bookService } from "../services/book.service.js";
+import { showErrorMsg } from "../services/event-bus.service.js"
+import { showSuccessMsg } from "../services/event-bus.service.js"
 const { Link } = ReactRouterDOM;
 
 const { useState, useEffect } = React;
@@ -27,9 +29,15 @@ export function BookIndex() {
     bookService
       .remove(bookId)
       .then(() =>
-        setBooks((books) => books.filter((book) => book.id !== bookId))
+        setBooks((books) =>{ 
+          books.filter((book) => book.id !== bookId)
+          showSuccessMsg('Book removed successfully')
+        })
       )
-      .catch((err) => console.log("err:", err));
+      .catch((err) => {
+        console.log("err:", err)
+        showErrorMsg('Error removing Book')
+      });
   }
 
   function onSelectBook(book) {
@@ -49,7 +57,7 @@ export function BookIndex() {
     <section className="book-index">
       <BookFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} />
       <button>
-        <Link to="/book/edit">Add Car</Link>
+        <Link to="/book/edit">Add Book</Link>
       </button>
       <BookList
         onRemoveBook={onRemoveBook}
@@ -57,7 +65,7 @@ export function BookIndex() {
         books={books}
       />
 
-      {selectedBook && <BookDetails book={selectedBook} onClose={onClose} />}
+    
     </section>
   );
 }

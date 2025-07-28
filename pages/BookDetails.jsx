@@ -131,6 +131,7 @@ export function BookDetails() {
           <span className="book-details-info-title">Description:</span>
           <LongTxt txt={desc} />
         </div>
+        
       </div>
     </section>
   );

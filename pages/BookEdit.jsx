@@ -1,4 +1,5 @@
 import { bookService } from "../services/book.service.js";
+import { showSuccessMsg } from "../services/event-bus.service.js";
 
 const { useNavigate, useParams } = ReactRouterDOM;
 const { useState, useEffect } = React;
@@ -37,20 +38,23 @@ export function BookEdit() {
     }
     setBooktoEdit((prevBook) => ({ ...prevBook, [field]: value }));
   }
-
+  function onBack() {
+    navigate("/book");
+  }
   function onSaveBook(ev) {
     ev.preventDefault();
     bookService
       .save(bookToEdit)
       .then((savedBook) => {
         console.log("Saved", savedBook);
+        showSuccessMsg("Book updated Successfully");
         navigate("/book");
       })
       .catch((err) => console.log("err:", err));
   }
-    const { title, desc } = bookToEdit
+  const { title, desc } = bookToEdit;
 
-    const loadingClass = isLoading ? 'loading' : ''
+  const loadingClass = isLoading ? "loading" : "";
 
   return (
     <section className="book-edit">
@@ -73,6 +77,9 @@ export function BookEdit() {
           name="desc"
           id="desc"
         />
+        <button className="go-back-btn" onClick={onBack}>
+          ⬅ Go back
+        </button>
         <button disabled={isLoading}>Save</button>
       </form>
     </section>

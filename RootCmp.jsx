@@ -8,6 +8,7 @@ import { AppHeader } from "./cmps/AppHeader.jsx";
 import { BookDetails } from "./pages/BookDetails.jsx";
 import { NotFound } from "./cmps/NotFound.jsx";
 import { BookEdit } from "./pages/BookEdit.jsx";
+import { UserMsg } from "./cmps/UserMsg.jsx";
 
 export function RootCmp() {
   return (
@@ -27,6 +28,7 @@ export function RootCmp() {
           </Routes>
         </nav>
       </section>
+      <UserMsg />
     </Router>
   );
 }
