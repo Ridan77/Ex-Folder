@@ -9,7 +9,7 @@
 .book-list li {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding-bottom: 5px;
     background-color: var(--clr1bg);
@@ -19,3 +19,4 @@
 .book-list li.loading {
     opacity: 0.7;
 }
+

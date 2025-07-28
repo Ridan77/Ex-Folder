@@ -25,22 +25,6 @@ export function BookFilter({ defaultFilter, handleSetFilter }) {
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
-    // function handleChangeDataInnerObjDemo({ target }) {
-    //     const field = target.name
-    //     let value = target.value
-    //     switch (target.type) {
-    //         case 'number':
-    //         case 'range':
-    //             value = +value
-    //             break;
-
-    //         case 'checkbox':
-    //             value = target.checked
-    //             break
-    //     }
-    //     setFilterByToEdit(prevFilter => ({ ...prevFilter, data: { ...prevFilter.data, [field]: value } }))
-    // }
-
     function handleChangeShortVersion({ target }) {
         const field = target.name
         const value = target.type === 'number' ? +target.value : target.value
@@ -61,7 +45,7 @@ export function BookFilter({ defaultFilter, handleSetFilter }) {
                 <label htmlFor="price">Max Price</label>
                 <input onChange={handleChange} name="price" value={price} id="price" type="number" />
             </form>
-      
+            button
         </section>
     )
 }

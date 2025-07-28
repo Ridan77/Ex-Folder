@@ -6,7 +6,6 @@ export function LongTxt({ txt, length = 100 }) {
   function onToggleText() {
     setIsLongTxt((isLongTxt) => !isLongTxt);
   }
-console.log(txt)
   const isLongerThanLimit = txt.length > length;
   const textToShow =
     isLongTxt || !isLongerThanLimit

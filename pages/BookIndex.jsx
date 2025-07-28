@@ -1,7 +1,8 @@
-import { BookDetails } from "../pages/BookDetails.jsx"
+import { BookDetails } from "../pages/BookDetails.jsx";
 import { BookFilter } from "../cmps/BookFilter.jsx";
 import { BookList } from "../cmps/BookList.jsx";
 import { bookService } from "../services/book.service.js";
+const { Link } = ReactRouterDOM;
 
 const { useState, useEffect } = React;
 
@@ -39,7 +40,6 @@ export function BookIndex() {
     setFilterBy({ ...newFilterBy });
   }
 
- 
   function onClose() {
     setSelectedBook(null);
   }
@@ -48,11 +48,16 @@ export function BookIndex() {
   return (
     <section className="book-index">
       <BookFilter handleSetFilter={handleSetFilter} defaultFilter={filterBy} />
-      <BookList onRemoveBook={onRemoveBook} onSelectBook={onSelectBook} books={books} />
+      <button>
+        <Link to="/book/edit">Add Car</Link>
+      </button>
+      <BookList
+        onRemoveBook={onRemoveBook}
+        onSelectBook={onSelectBook}
+        books={books}
+      />
 
-      {selectedBook && (<BookDetails book={selectedBook} onClose={onClose}/>)}
-       
-      
+      {selectedBook && <BookDetails book={selectedBook} onClose={onClose} />}
     </section>
   );
 }

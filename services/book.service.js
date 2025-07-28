@@ -11,6 +11,7 @@ export const bookService = {
     save,
     getDefaultFilter,
     getPriceClass,
+    getEmptyBook,
 
 
 }
@@ -45,7 +46,9 @@ function save(book) {
         return storageService.post(BOOK_KEY, book)
     }
 }
-
+function getEmptyBook(title = '', desc = '') {
+    return { title, desc }
+}
 
 function getDefaultFilter() {
     // return { txt: '', price: '', data: { txtData: '' } }
