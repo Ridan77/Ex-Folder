@@ -14,6 +14,7 @@ export const bookService = {
     getEmptyBook,
     saveReview,
     getReviews,
+    deleteReview,
 
 
 }
@@ -101,9 +102,9 @@ function _createBooks() {
 
 
 function saveReview(review, bookId) {
-    console.log(review)
     return get(bookId)
         .then((book) => {
+            review.id = makeId()
             book.reviews.unshift(review)
             save(book)
             return book.reviews
@@ -115,3 +116,17 @@ function getReviews(bookId) {
             return book.reviews
         })
 }
+
+function deleteReview(bookId,reviewId){
+       return get(bookId)
+          .then(book => {
+            const idx = book.reviews.findIndex(item=>item.id===reviewId)
+            book.reviews.splice(idx,1)
+            console.log(book.reviews)
+            save(book)
+            return book.reviews
+        })
+}
+
+
+

@@ -7,7 +7,7 @@ export function AddReview({ bookId }) {
   function getToday() {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+    const month = String(today.getMonth() + 1).padStart(2, "0")
     const day = String(today.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   }
@@ -20,13 +20,11 @@ export function AddReview({ bookId }) {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    bookService.getReviews(bookId)
-    .then((reviews) => {
-      console.log(reviews);
-      setReviews(reviews)
+    bookService.getReviews(bookId).then((reviews) => {
+      setReviews(reviews);
     });
   }, []);
-console.log(reviews)
+
   function handleChange({ target }) {
     const field = target.name;
     let value = target.value;
@@ -42,14 +40,20 @@ console.log(reviews)
     }
     setReviewToEdit((prevReview) => ({ ...prevReview, [field]: value }));
   }
-
+function onDeleteReview(reviewId){
+  bookService.deleteReview(bookId,reviewId)
+  .then(reviews=> {
+    console.log(reviews)
+    setReviews(reviews)
+  })
+}
   function onAddReview(ev) {
     ev.preventDefault();
     bookService
       .saveReview(reviewToEdit, bookId)
       .then((reviews) => {
         console.log("Saved", reviews);
-        setReviews(reviews)
+        setReviews(reviews);
         // showSuccessMsg('Review Added successfully')
         // navigate("/car");
       })
@@ -58,39 +62,63 @@ console.log(reviews)
         showErrorMsg("Error adding review");
       });
   }
-
+ function getStars(rate){
+    var str=''
+    for (var i=0; i<rate;i++){
+        str+='⭐'
+    }
+    return str
+ }
   const { fullname, rate, date } = reviewToEdit;
   return (
-    <form onSubmit={onAddReview}>
-      <label htmlFor="fullname">Full Name ?</label>
-      <input
-        value={fullname}
-        onChange={handleChange}
-        type="text"
-        name="fullname"
-        id="fullname"
-      />
+    <div>
+      <form onSubmit={onAddReview}>
+        <label htmlFor="fullname">Full Name ?</label>
+        <input
+          value={fullname}
+          onChange={handleChange}
+          type="text"
+          name="fullname"
+          id="fullname"
+        />
 
-      <label htmlFor="rate">Rating ?</label>
-      <input
-        value={rate}
-        onChange={handleChange}
-        type="range"
-        min="0"
-        max="5"
-        name="rate"
-        id="rate"
-      />
+        <label htmlFor="rate">Rating ?</label>
+        <input
+          value={rate}
+          onChange={handleChange}
+          type="range"
+          min="0"
+          max="5"
+          name="rate"
+          id="rate"
+        />
 
-      <label htmlFor="date">When did you read it ?</label>
-      <input
-        value={date}
-        onChange={handleChange}
-        type="date"
-        name="date"
-        id="date"
-      />
-      <button>Save</button>
-    </form>
+        <label htmlFor="date">When did you read it ?</label>
+        <input
+          value={date}
+          onChange={handleChange}
+          type="date"
+          name="date"
+          id="date"
+        />
+        <button>Save</button>
+      </form>
+      <section>
+
+
+    {!!reviews.length && <ul className="review-list container">
+      <h3>Reviews given:</h3>
+      {reviews.map((review) => (
+        <li key={review.id}>
+            <button onClick={()=>onDeleteReview(review.id)} >X</button>
+            Read on: {review.date},
+            Name: {review.fullname},
+            Rate: {getStars(review.rate)}
+        </li>
+      ))}
+    </ul>}
+
+      </section>
+    </div>
   );
 }
