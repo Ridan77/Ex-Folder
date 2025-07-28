@@ -23,7 +23,7 @@ export function AddReview({ bookId }) {
     bookService.getReviews(bookId).then((reviews) => {
       setReviews(reviews);
     });
-  }, []);
+  }, [bookId]);
 
   function handleChange({ target }) {
     const field = target.name;
@@ -43,7 +43,6 @@ export function AddReview({ bookId }) {
 function onDeleteReview(reviewId){
   bookService.deleteReview(bookId,reviewId)
   .then(reviews=> {
-    console.log(reviews)
     setReviews(reviews)
   })
 }
@@ -52,10 +51,9 @@ function onDeleteReview(reviewId){
     bookService
       .saveReview(reviewToEdit, bookId)
       .then((reviews) => {
-        console.log("Saved", reviews);
+
         setReviews(reviews);
-        // showSuccessMsg('Review Added successfully')
-        // navigate("/car");
+
       })
       .catch((err) => {
         console.log("err:", err);
@@ -93,7 +91,7 @@ function onDeleteReview(reviewId){
           id="rate"
         />
 
-        <label htmlFor="date">When did you read it ?</label>
+        <label htmlFor="date">When ?</label>
         <input
           value={date}
           onChange={handleChange}

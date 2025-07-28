@@ -1,5 +1,5 @@
 import { AddReview } from "../cmps/AddReview.jsx";
-import { LongTxt } from "../cmps/LongTxt.jsx"
+import { LongTxt } from "../cmps/LongTxt.jsx";
 import { bookService } from "../services/book.service.js";
 
 const { useState, useEffect } = React;
@@ -9,11 +9,10 @@ export function BookDetails() {
   const { bookId } = useParams();
   const navigate = useNavigate();
   const [book, setBook] = useState(null);
-  console.log(bookId);
+
   useEffect(() => {
     loadBook();
   }, [bookId]);
-
   function loadBook() {
     bookService
       .get(bookId)
@@ -61,12 +60,19 @@ export function BookDetails() {
     categories,
     listPrice,
   } = book;
-  
   const priceClass = bookService.getPriceClass(listPrice.amount);
   const publishDate = getPublishDate();
   const pageCount = getPageCount();
   return (
     <section className="book-details-container">
+      <div className="page-btn-container">
+        <button>
+          <Link to={`/book/${book.prevBookId}`}>Prev</Link>
+        </button>
+        <button>
+          <Link to={`/book/${book.nextBookId}`}>Next</Link>
+        </button>
+      </div>
       <div className="book-details-title">{title}</div>
       <div className="book-details-subtitle">{subtitle}</div>
       <div className="book-thumbnail-container">
@@ -121,19 +127,19 @@ export function BookDetails() {
               Buy it now!
             </button>
           )}
-          <div className="actions-btns">
-            <button className="go-back-btn" onClick={onBack}>
-              ⬅ Go back
-            </button>
-          </div>
         </div>
 
         <div className="book-details-info-row">
           <span className="book-details-info-title">Description:</span>
           <LongTxt txt={desc} />
         </div>
-        
-      <AddReview bookId={bookId}/>
+
+        <AddReview bookId={bookId} />
+          <div className="actions-btns">
+            <button className="go-back-btn" onClick={onBack}>
+              ⬅ Go back
+            </button>
+          </div>
       </div>
     </section>
   );
