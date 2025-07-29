@@ -15,8 +15,7 @@ export const bookService = {
     saveReview,
     getReviews,
     deleteReview,
-
-
+    getFilterFromSearchParams,
 }
 
 function query(filterBy = {}) {
@@ -24,7 +23,6 @@ function query(filterBy = {}) {
         .then(books => {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
-                console.log(filterBy)
                 books = books.filter(book => regExp.test(book.title))
             }
             if (filterBy.price) {
@@ -141,3 +139,12 @@ function _setNextPrevBookId(book) {
     })
 }
 
+
+function getFilterFromSearchParams(searchParams) {
+    const txt = searchParams.get('txt') || ''
+    const price = searchParams.get('price') || ''
+    return {
+        txt,
+        price,
+    }
+}

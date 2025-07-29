@@ -1,19 +1,24 @@
 import { BookFilter } from "../cmps/BookFilter.jsx";
 import { BookList } from "../cmps/BookList.jsx";
 import { bookService } from "../services/book.service.js";
-import { showErrorMsg } from "../services/event-bus.service.js"
-import { showSuccessMsg } from "../services/event-bus.service.js"
+import { showErrorMsg } from "../services/event-bus.service.js";
+import { showSuccessMsg } from "../services/event-bus.service.js";
+import { getTruthyValues } from "../services/util.service.js"
 const { Link } = ReactRouterDOM;
 
 const { useState, useEffect } = React;
+const { useSearchParams } = ReactRouterDOM;
 
 export function BookIndex() {
   const [books, setBooks] = useState(null);
-
-  const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams);
+  const [filterBy, setFilterBy] = useState(
+    bookService.getFilterFromSearchParams(searchParams)
+  );
 
   useEffect(() => {
+    setSearchParams(getTruthyValues(filterBy));
     loadBooks();
   }, [filterBy]);
 
@@ -28,14 +33,14 @@ export function BookIndex() {
     bookService
       .remove(bookId)
       .then(() =>
-        setBooks((books) =>{ 
-          books.filter((book) => book.id !== bookId)
-          showSuccessMsg('Book removed successfully')
+        setBooks((books) => {
+          books.filter((book) => book.id !== bookId);
+          showSuccessMsg("Book removed successfully");
         })
       )
       .catch((err) => {
-        console.log("err:", err)
-        showErrorMsg('Error removing Book')
+        console.log("err:", err);
+        showErrorMsg("Error removing Book");
       });
   }
 
@@ -63,8 +68,6 @@ export function BookIndex() {
         onSelectBook={onSelectBook}
         books={books}
       />
-
-    
     </section>
   );
 }
