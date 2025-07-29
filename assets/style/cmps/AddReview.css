@@ -1,0 +1,14 @@
+.reviews-container {
+}
+
+.form-container{
+display: flex;
+gap: 20px;
+flex-direction: column;
+align-items: center;
+}
+
+.input-container{
+    display: flex;
+    gap: 20px;
+}

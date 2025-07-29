@@ -135,11 +135,7 @@ export function BookDetails() {
         </div>
 
         <AddReview bookId={bookId} />
-          <div className="actions-btns">
-            <button className="go-back-btn" onClick={onBack}>
-              ⬅ Go back
-            </button>
-          </div>
+        
       </div>
     </section>
   );
